@@ -24,7 +24,7 @@ ViewModels inherit a method called 'safeCall' which allows them to execute corou
 
 #### Structure
 The app is structured in five folders.
-- DAGGER: Dependency injection modules. Given the simplicity of the application, all provide singleton objects, but are in separate files because of different purpose.
+- DAGGER: Dependency injection modules. Given the simplicity of the application, all provide singleton objects, but are in separate files because they have a different purpose.
 - MODEL: We have an Entities folder, which contains all objects we will use to display the user some information, no raw data. The Service, Requests and Responses folder are self explainatory.
 - NETWORK: Interfaces containing different HTTP calls
 - VIEW: Contains all view logic, and also all ViewModel logic. One would think that ViewModels, as they're closer to data than Activities/Fragments, should be on a different folder such as ViewModel. But from experience I find that having the ViewModel of an Activity/Fragment inside the same folder is very comfortable, given that when you're modifying a view you'll most likely modify the ViewModel related to such view.
