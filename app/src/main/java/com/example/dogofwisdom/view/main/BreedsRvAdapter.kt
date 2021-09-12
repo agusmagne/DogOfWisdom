@@ -25,7 +25,7 @@ class BreedsRvAdapter(private var breeds: List<Breed> = listOf()): RecyclerView.
 		val list = listOf<Breed>()
 		breeds = list
 		breeds = newBreeds
-		notifyDataSetChanged()
+		notifyItemRangeChanged(0, newBreeds.size - 1)
 	}
 	
 	inner class BreedsViewHolder(private val binding: BreedsRvRowBinding): RecyclerView.ViewHolder(binding.root) {
