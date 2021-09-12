@@ -1,3 +1,7 @@
 package com.example.dogofwisdom.model.entities
 
-class Breed(var name: String = "")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+class Breed(var displayName: String = "", var breed: String = "", var variant: String = "") : Parcelable

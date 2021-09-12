@@ -6,15 +6,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dogofwisdom.databinding.BreedsRvRowBinding
 import com.example.dogofwisdom.model.entities.Breed
 
-class BreedsRvAdapter(private var breeds: List<Breed> = listOf()): RecyclerView.Adapter<BreedsRvAdapter.BreedsViewHolder>() {
+class BreedsRvAdapter(
+	private val onClickEvent: (Breed) -> Unit
+) : RecyclerView.Adapter<BreedsRvAdapter.BreedsViewHolder>() {
+	
+	private var breeds: List<Breed> = listOf()
 	
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedsViewHolder {
-		val itemView = BreedsRvRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-		return BreedsViewHolder(itemView)
+		val view =
+			BreedsRvRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+		return BreedsViewHolder(view)
 	}
 	
 	override fun onBindViewHolder(holder: BreedsViewHolder, position: Int) {
-		holder.bindView(breeds[position])
+		breeds[position].apply {
+			holder.bindView(this)
+			holder.itemView.setOnClickListener { onClickEvent(this) }
+		}
 	}
 	
 	override fun getItemCount(): Int {
@@ -28,9 +36,10 @@ class BreedsRvAdapter(private var breeds: List<Breed> = listOf()): RecyclerView.
 		notifyItemRangeChanged(0, newBreeds.size - 1)
 	}
 	
-	inner class BreedsViewHolder(private val binding: BreedsRvRowBinding): RecyclerView.ViewHolder(binding.root) {
+	inner class BreedsViewHolder(private val binding: BreedsRvRowBinding) :
+		RecyclerView.ViewHolder(binding.root) {
 		fun bindView(breed: Breed) {
-			binding.breedName.text = breed.name
+			binding.breedName.text = breed.displayName
 		}
 	}
 }

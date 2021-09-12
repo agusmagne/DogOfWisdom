@@ -5,4 +5,8 @@
     <string name="dismiss">Dismiss</string>
     <string name="unknown_error">Unknown error</string>
     <string name="breeds_rv_description">Select a dog breed to impart you with wisdom</string>
+    <string name="loading">Loading</string>
+    <string name="server_error">Error fetching information from server</string>
+    <string name="fetch_images_success">Images downloaded successfully</string>
+    <string name="fetch_breeds_success">All breeds downloaded successfully</string>
 </resources>

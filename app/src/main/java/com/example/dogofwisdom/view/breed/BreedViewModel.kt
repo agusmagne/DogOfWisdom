@@ -1,8 +1,7 @@
-package com.example.dogofwisdom.view.main
+package com.example.dogofwisdom.view.breed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.dogofwisdom.R
 import com.example.dogofwisdom.model.entities.Breed
 import com.example.dogofwisdom.model.service.DogsService
@@ -13,19 +12,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel
+class BreedViewModel
 @Inject constructor(
-    private val dogsService: DogsService
+	private val dogsService: DogsService
 ) : BaseViewModel() {
-    
-    private val _breedsLD = MutableLiveData<List<Breed>>()
-    val breedsLD = _breedsLD as LiveData<List<Breed>>
-
-    fun getBreeds() {
-        safeCall {
-            _breedsLD.postValue(dogsService.getAllBreeds())
-            BaseActivity.SuccessNotification.postEvent(R.string.fetch_breeds_success)
-        }
-    }
-
+	
+	private val _imagesLD = MutableLiveData<List<String>>()
+	val imagesLD = _imagesLD as LiveData<List<String>>
+	
+	fun getImages(breed: Breed) {
+		safeCall {
+			_imagesLD.postValue(dogsService.getRandomImages(breed))
+			BaseActivity.SuccessNotification.postEvent(R.string.fetch_images_success)
+		}
+	}
 }

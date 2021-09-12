@@ -1,13 +1,17 @@
 package com.example.dogofwisdom.view
 
 import androidx.lifecycle.*
+import com.example.dogofwisdom.R
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
-
+    
+    /**
+     * Allows ViewModels to execute coroutines safely
+     */
     protected fun safeCall(dispatcher: CoroutineDispatcher? = null, method: suspend () -> Unit) {
         try {
             if (dispatcher == null) {
@@ -20,11 +24,16 @@ open class BaseViewModel : ViewModel() {
                 }
             }
         } catch (e: Throwable) {
-
+            e.stackTrace.forEach { println(it) }
+            println(e.message)
+            BaseActivity.ErrorNotification.postEvent(R.string.server_error)
         }
 
     }
-
+    
+    /**
+     * Class implemented for single one time events with any type of content
+     */
     class Event<out T>(private val content: T) {
 
         private var hasBeenHandled: Boolean = false
@@ -38,7 +47,10 @@ open class BaseViewModel : ViewModel() {
             }
         }
     }
-
+    
+    /**
+     * Class implemented for single on time events, but nothings gets passed as data
+     */
     class VoidEvent {
 
         var hasBeenHandled: Boolean = false
