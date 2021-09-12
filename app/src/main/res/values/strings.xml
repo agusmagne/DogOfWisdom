@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DogOfWisdom</string>
     <string name="app_title">Dog of Wisdom</string>
+    <string name="error">Error</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="breeds_rv_description">Select a dog breed to impart you with wisdom</string>
 </resources>
